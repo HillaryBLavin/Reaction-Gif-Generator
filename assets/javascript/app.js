@@ -21,11 +21,35 @@ function renderButtons() {
     }
 }
 
+// Write a function to call the GIPHY API
+function generateGifs() {
+    // Delete any gifs that are already in the reaction-gifs div
+    $("#reaction-gifs").empty();
+    // Write a variable that grabs the value of the data-emotion
+    var emotion = $(this).attr("data-emotion");
+    // Write a variable that concatenates the emotion into the API query URL
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + emotion + "&api_key=fKFFjos0nnSXhvx7xXH3PhQehPKzfTHN&limit=10";
+
+    // AJAX call for the specific reaction button being clicked
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        // Create a variable to grab onto the reaction-gifs div 
+        var rxnDiv = $("#reaction-gifs");
+        // Append the retrieved gifs to the div
+        rxnDiv.append(response);
+    });
+
+}
+
+
 // Call renderButtons function
 renderButtons();
 
 // Create on-click event for each button that will...
-// Call the GIPHY API and return 10 random static images using the topic as a search parameter
+
+
 
 // Create on-click event for the gifs to animate when clicked...
 // And pause when clicked again
