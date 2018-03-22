@@ -1,5 +1,5 @@
 // Create Array to hold reactions ("topics")
-var topics = ['happy', 'laughing', 'sad', 'crying', 'surprised', 'confused', 'embarrassed', 'flirty', 'wink', 'blow a kiss', 'eyebrow raise']
+var topics = ['Happy', 'Laughing', 'Sad', 'Crying', 'Surprised', 'Confused', 'Embarrassed', 'Flirty', 'Wink', 'Blow a Kiss', 'Eyebrow Raise']
 
 // Create a button for each "topic" (write HTML to the DOM)
 function renderButtons() {
