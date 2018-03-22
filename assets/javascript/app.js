@@ -1,5 +1,5 @@
 // Create Array to hold reactions ("topics")
-var topics = ['Happy', 'Laughing', 'Sad', 'Crying', 'Surprised', 'Confused', 'Embarrassed', 'Flirty', 'Wink', 'Blow a Kiss', 'Eyebrow Raise']
+var topics = ['Happy', 'Laughing', 'Sad', 'Crying', 'Surprised', 'Confused', 'Embarrassed', 'Flirty', 'Wink', 'Blow a Kiss', 'Eyebrow Raise'];
 
 // Create a button for each "topic" (write HTML to the DOM)
 function renderButtons() {
@@ -7,9 +7,9 @@ function renderButtons() {
     $("#reaction-buttons").empty();
 
     // Use a for-loop to iterate through the topics array
-    for (i = 0; i > topics.length; i++) {
+    for (i = 0; i < topics.length; i++) {
         // Generate button for each reaction in the array
-        var b = $("<button>")
+        var b = $("<button>");
         // Add bootstrap and rxn-btn classes to the button
         b.addClass("rxn-btn btn btn-primary");
         // Add a data attribute (data-emotion) to the button that will have a reaction as a value
@@ -20,6 +20,9 @@ function renderButtons() {
         $("#reaction-buttons").append(b);
     }
 }
+
+// Call renderButtons function
+renderButtons();
 
 // Create on-click event for each button that will...
 // Call the GIPHY API and return 10 random static images using the topic as a search parameter
