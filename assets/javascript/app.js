@@ -21,7 +21,7 @@ function renderButtons() {
     }
 }
 
-// Write a function to call the GIPHY API
+// Write a function to call the GIPHY API and write the gifs to the DOM
 function generateGifs() {
     // Delete any gifs that are already in the reaction-gifs div
     $("#reaction-gifs").empty();
@@ -39,17 +39,33 @@ function generateGifs() {
         var rxnDiv = $("#reaction-gifs");
         // Append the retrieved gifs to the div
         rxnDiv.append(response);
+        // Create a variable to store the image paramater
+        var gifURL = response.original_still;
+        //Create an HTML element to hold the still gif
+        var stillGif = $("<img>").attr("src", gifURL);
+        // Append the gif to the div
+        rxnDiv.append(stillGif);
     });
 
 }
 
+// Create on-click event for adding new reaction buttons
+$("#add-reaction").on("click", function(event) {
+    // Add prevent default because we're not sending the info to a database or anything
+    event.preventDefault();
+    // Grab the user's input from the form 
+    var newRxn = $("#reaction-input").val().trim();
+    // Add the user's input to the topics array
+    topics.push(newRxn);
+    // Call renderButtons function
+    renderButtons();
+});
 
-// Call renderButtons function
+// Create on-click event that calls the Giphy API when any of the reaction buttons are clicked
+$(document).on("click", ".rxn-btn", generateGifs);
+
+// Call the renderButtons function to display initial buttons
 renderButtons();
-
-// Create on-click event for each button that will...
-
-
 
 // Create on-click event for the gifs to animate when clicked...
 // And pause when clicked again
