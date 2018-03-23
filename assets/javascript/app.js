@@ -28,23 +28,34 @@ function generateGifs() {
     // Write a variable that grabs the value of the data-emotion
     var emotion = $(this).attr("data-emotion");
     // Write a variable that concatenates the emotion into the API query URL
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + emotion + "&api_key=fKFFjos0nnSXhvx7xXH3PhQehPKzfTHN&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=fKFFjos0nnSXhvx7xXH3PhQehPKzfTHN&q=" + emotion + "&limit=10";
 
     // AJAX call for the specific reaction button being clicked
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-        // Create a variable to grab onto the reaction-gifs div 
-        var rxnDiv = $("#reaction-gifs");
-        // Append the retrieved gifs to the div
-        rxnDiv.append(response);
-        // Create a variable to store the image paramater
-        var gifURL = response.original_still;
-        //Create an HTML element to hold the still gif
-        var stillGif = $("<img>").attr("src", gifURL);
-        // Append the gif to the div
-        rxnDiv.append(stillGif);
+        // Create a variable to store results data
+        var results = response.data;
+        // Use a for-loop to iterate through the results
+        for (var i = 0; i < results.length; i++) {
+            // Store each gif's rating
+            var rating = results[i].rating;
+            // Create a paragraph tag to display the gif's rating
+            var p = $("<p>").text("Rating: " + rating);
+            // Create a variable to store the image property
+            var gifURL = results[i].images.original_still.url;
+            // Create an HTML element to hold the still gif
+            var stillGif = $("<img>")
+            // Assign a "src" to the image tag using the stored image property
+            stillGif.attr("src", gifURL);
+            // Create a variable to grab onto the reaction-gifs div 
+            var rxnDiv = $("#reaction-gifs");
+            // Append the gif and rating to the div
+            rxnDiv.append(p);
+            rxnDiv.append(stillGif);
+        }
+
     });
 
 }
