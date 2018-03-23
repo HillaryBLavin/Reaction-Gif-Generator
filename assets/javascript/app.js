@@ -85,7 +85,7 @@ $(document).on("click", ".rxn-btn", generateGifs);
 renderButtons();
 
 // Create on-click event for the gifs to animate when clicked...
-$(".gif").on("click", function() {
+$(document).on("click", ".gif", function() {
     // Create a variable to store the current "state" (animated or still) of the clicked gif
     var state = $(this).attr("data-state");
     // If the gif is currently still...
