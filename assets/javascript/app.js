@@ -66,7 +66,7 @@ function generateGifs() {
 
 }
 
-// Create on-click event for adding new reaction buttons
+// Create on-click event for adding new reaction buttons based on user form input
 $("#add-reaction").on("click", function(event) {
     // Add prevent default because we're not sending the info to a database or anything
     event.preventDefault();
@@ -85,11 +85,24 @@ $(document).on("click", ".rxn-btn", generateGifs);
 renderButtons();
 
 // Create on-click event for the gifs to animate when clicked...
-// And pause when clicked again
+$(".gif").on("click", function() {
+    // Create a variable to store the current "state" (animated or still) of the clicked gif
+    var state = $(this).attr("data-state");
+    // If the gif is currently still...
+    if (state === "still") {
+        //...then update the src of the <img> to be the animated version of the gif
+        $(this).attr("src", $(this).attr("data-animate"));
+        //...and update the data-state of the <img> to be "animate"
+        $(this).attr("data-state", "animate");
+    // If the gif is currently animated...    
+    } else {
+        //...then update the src of the <img> to be the still version of the gif
+        $(this).attr("src", $(this).attr("data-still"));
+        //... and update the data-state of the <img> to be "still"
+        $(this).attr("data-state", "still");
+    }
+});
 
-// Display the rating for each gif (DO THIS ONLY AFTER YOU HAVE GOTTEN PREVIOUS STEPS TO WORK)
 
-// Using the input value from the form, add the user's reaction to the topics array...
-// And create a new button for each new topic
 
 
