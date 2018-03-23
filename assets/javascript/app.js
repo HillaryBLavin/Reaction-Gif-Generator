@@ -43,17 +43,23 @@ function generateGifs() {
             var rating = results[i].rating;
             // Create a paragraph tag to display the gif's rating
             var p = $("<p>").text("Rating: " + rating);
-            // Create a variable to store the image property
-            var gifURL = results[i].images.original_still.url;
+            // Create variables to store image properties
+            var stillURL = results[i].images.original_still.url;
+            var animateURL = results[i].images.original.url;
             // Create an HTML element to hold the still gif
-            var stillGif = $("<img>")
+            var imageTag = $("<img>")
             // Assign a "src" to the image tag using the stored image property
-            stillGif.attr("src", gifURL);
+            imageTag.attr("src", stillURL);
+            imageTag.attr("data-still", stillURL);
+            imageTag.attr("data-animate", animateURL);
+            imageTag.attr("data-state", "still");
+            imageTag.addClass("gif");
+
             // Create a variable to grab onto the reaction-gifs div 
             var rxnDiv = $("#reaction-gifs");
             // Append the gif and rating to the div
+            rxnDiv.append(imageTag);
             rxnDiv.append(p);
-            rxnDiv.append(stillGif);
         }
 
     });
