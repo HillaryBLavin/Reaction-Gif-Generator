@@ -1,5 +1,5 @@
 // Create Array to hold reactions ("topics")
-var topics = ['Happy', 'Laughing', 'Sad', 'Crying', 'Surprised', 'Confused', 'Embarrassed', 'Flirty', 'Wink', 'Blow a Kiss', 'Eyebrow Raise'];
+var topics = ['Laughing', 'Crying', 'Excited', 'Surprised', 'Confused', 'Embarrassed', 'Flirty', 'Winking', 'Blow a Kiss', 'Eyebrow Raise'];
 
 // Create a button for each "topic" (write HTML to the DOM)
 function renderButtons() {
@@ -41,25 +41,32 @@ function generateGifs() {
         for (var i = 0; i < results.length; i++) {
             // Store each gif's rating
             var rating = results[i].rating;
-            // Create a paragraph tag to display the gif's rating
-            var p = $("<p>").text("Rating: " + rating);
             // Create variables to store image properties
             var stillURL = results[i].images.original_still.url;
             var animateURL = results[i].images.original.url;
+            // Create a div with the bootstrap classes for an Image Card
+            var card = $("<div>").addClass("card mx-auto d-block").attr("style", "width: 250px");
             // Create an HTML element to hold the still gif
-            var imageTag = $("<img>")
+            var imageTag = $("<img>");
             // Assign a "src" to the image tag using the stored image property
             imageTag.attr("src", stillURL);
             imageTag.attr("data-still", stillURL);
             imageTag.attr("data-animate", animateURL);
             imageTag.attr("data-state", "still");
-            imageTag.addClass("gif");
-
+            imageTag.addClass("gif card-img-top");
+            // Create a card-body div
+            var cardBody = $("<div>").addClass("card-body");
+            // Create a paragraph tag to display the gif's rating
+            var p = $("<p>").addClass("card-text").text("Rating: " + rating);
             // Create a variable to grab onto the reaction-gifs div 
             var rxnDiv = $("#reaction-gifs");
-            // Append the gif and rating to the div
-            rxnDiv.append(imageTag);
-            rxnDiv.append(p);
+            // Append card-text to card-body
+            cardBody.append(p);
+            // Append imageTag and card-body to card <div>
+            card.append(imageTag);
+            card.append(cardBody);
+            // Append the card to the rxnDiv
+            rxnDiv.append(card);
         }
 
     });
