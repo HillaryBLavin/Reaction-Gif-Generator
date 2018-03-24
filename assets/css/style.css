@@ -5,3 +5,11 @@
 .rxn-btn {
     margin: 2px;
 }
+
+.card-img-top {
+    width: 100%;
+}
+
+.card {
+    margin-bottom: 15px;
+}
